@@ -1,396 +1,237 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Project Title</title>
-  <style>
-    :root{
-      --text:#111;
-      --muted:#666;
-      --link:#1a73e8;
-      --bg:#fff;
-      --btn:#222;
-      --btnText:#fff;
-      --card:#f6f7f9;
-      --border:#e6e8ee;
-      --max: 980px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.55;
-    }
-    a{color:var(--link); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .container{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 40px 18px 80px;
-      text-align:center;
-    }
-    .title{
-      font-size: 44px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin: 10px 0 14px;
-    }
-    .subtitle-note{
-      color:var(--muted);
-      margin-top: 6px;
-      font-size: 14px;
-    }
-    .authors{
-      margin: 6px 0 6px;
-      font-size: 18px;
-      font-weight: 600;
-    }
-    .authors a{font-weight:700}
-    .affils{
-      margin: 8px auto 16px;
-      color: var(--muted);
-      font-size: 15px;
-      max-width: 760px;
-    }
-    .venue{
-      margin: 18px 0 18px;
-      font-size: 28px;
-      font-weight: 800;
-      color: #1f4aa8; /* similar blue vibe */
-      letter-spacing: 1px;
-    }
-    .btn-row{
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin: 10px 0 28px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      background: var(--btn);
-      color: var(--btnText);
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-weight: 700;
-      min-width: 140px;
-      border: 1px solid #0000;
-      transition: transform .06s ease, opacity .15s ease;
-    }
-    .btn:hover{opacity:.92; text-decoration:none}
-    .btn:active{transform: translateY(1px)}
-    .btn .icon{
-      width:18px; height:18px; display:inline-block;
-      border-radius: 4px;
-      background:#fff2;
-    }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SurgXBench | WACV 2026</title>
 
-    .section-title{
-      margin: 44px 0 12px;
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: -0.3px;
-    }
-    .section-sub{
-      margin: 8px 0 16px;
-      color: var(--muted);
-      font-weight: 600;
-    }
+<style>
+:root{
+  --bg:#0c1224;
+  --panel:#121a33;
+  --text:#f1f5ff;
+  --muted:#b8c1e6;
+  --accent:#4cc9f0;
+  --accent2:#a78bfa;
+  --border:rgba(255,255,255,.08);
+  --shadow:0 8px 30px rgba(0,0,0,.35);
+  --max:1000px;
+}
 
-    .thumbs{
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      flex-wrap:wrap;
-      margin: 14px 0 24px;
-    }
-    .thumb{
-      width: 120px;
-      height: 90px;
-      border-radius: 12px;
-      overflow:hidden;
-      background: var(--card);
-      border: 1px solid var(--border);
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-    }
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .thumb::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      box-shadow: inset 0 0 0 0 rgba(26,115,232,.0);
-      transition: box-shadow .15s ease;
-    }
-    .thumb:hover::after{
-      box-shadow: inset 0 0 0 3px rgba(26,115,232,.35);
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  background:radial-gradient(1000px 600px at 15% 10%, rgba(167,139,250,.25), transparent 60%),
+             radial-gradient(1000px 600px at 90% 20%, rgba(76,201,240,.2), transparent 60%),
+             var(--bg);
+  color:var(--text);
+  line-height:1.65;
+}
 
-    .demo-panel{
-      max-width: 860px;
-      margin: 0 auto;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow:hidden;
-      text-align:left;
-    }
-    .demo-top{
-      padding: 14px 16px;
-      background: #fafbfc;
-      border-bottom: 1px solid var(--border);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .demo-top strong{font-size:14px}
-    .pill{
-      font-size:12px;
-      color:#1f4aa8;
-      background: rgba(31,74,168,.10);
-      border: 1px solid rgba(31,74,168,.18);
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-weight: 700;
-    }
-    .demo-body{
-      padding: 16px;
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 16px;
-    }
-    .demo-main{
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow:hidden;
-      background: var(--card);
-      min-height: 280px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-    }
-    .demo-main img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .demo-main .placeholder{
-      color: var(--muted);
-      font-weight: 700;
-    }
-    .demo-side{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .side-card{
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
-      background:#fff;
-    }
-    .side-card h4{
-      margin:0 0 8px;
-      font-size: 14px;
-      letter-spacing:.2px;
-    }
-    .side-card p{
-      margin:0;
-      font-size: 13px;
-      color: var(--muted);
-    }
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
 
-    .abstract{
-      max-width: 860px;
-      margin: 0 auto;
-      text-align:left;
-      font-size: 16px;
-      color: #222;
-    }
-    .abstract p{
-      margin: 0 0 14px;
-    }
+.container{
+  max-width:var(--max);
+  margin:auto;
+  padding:50px 20px 90px;
+  text-align:center;
+}
 
-    .footer{
-      margin-top: 60px;
-      color: var(--muted);
-      font-size: 13px;
-    }
+.badge{
+  display:inline-block;
+  padding:8px 16px;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:.4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#000;
+  margin-bottom:18px;
+}
 
-    @media (max-width: 820px){
-      .title{font-size:36px}
-      .demo-body{grid-template-columns: 1fr}
-    }
-  </style>
+.title{
+  font-size:44px;
+  font-weight:900;
+  margin:10px 0;
+}
+
+.subtitle{
+  font-size:18px;
+  color:var(--muted);
+  margin-bottom:22px;
+}
+
+.authors{
+  font-weight:700;
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.affil{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:30px;
+}
+
+.btn-row{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:50px;
+}
+
+.btn{
+  padding:12px 18px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  font-weight:800;
+  box-shadow:var(--shadow);
+  transition:all .15s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#000;
+  text-decoration:none;
+}
+
+.section{
+  max-width:900px;
+  margin:auto;
+  text-align:left;
+  margin-bottom:50px;
+}
+
+.section h2{
+  font-size:26px;
+  margin-bottom:14px;
+}
+
+.section p{
+  color:var(--muted);
+  margin-bottom:16px;
+}
+
+.figure-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  margin-bottom:30px;
+  box-shadow:var(--shadow);
+}
+
+.figure-card img{
+  width:100%;
+  display:block;
+}
+
+.figure-caption{
+  padding:14px 18px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:60px;
+}
+</style>
 </head>
 
 <body>
-  <div class="container">
 
-    <!-- ======= TITLE ======= -->
-    <div class="title">YOUR PROJECT 🧠: A Short Catchy Tagline</div>
+<div class="container">
 
-    <!-- ======= AUTHORS (replace with your names) ======= -->
-    <div class="authors">
-      <a href="YOUR_AUTHOR1_LINK" target="_blank" rel="noopener">Author One</a><sup>1,*</sup>,
-      <a href="YOUR_AUTHOR2_LINK" target="_blank" rel="noopener">Author Two</a><sup>2,*</sup>,
-      <a href="YOUR_AUTHOR3_LINK" target="_blank" rel="noopener">Author Three</a><sup>1</sup>
-    </div>
-    <div class="subtitle-note">*Equal contribution</div>
+<div class="badge">WACV 2026 — Accepted</div>
 
-    <!-- ======= AFFILIATIONS (replace) ======= -->
-    <div class="affils">
-      <div><sup>1</sup> Your University / Lab, Country</div>
-      <div><sup>2</sup> Your Company / Institute, Country</div>
-    </div>
+<div class="title">SurgXBench</div>
+<div class="subtitle">
+Explainable Vision-Language Model Benchmark for Robotic Surgery
+</div>
 
-    <!-- ======= VENUE (replace) ======= -->
-    <div class="venue">CVPR 20XX</div>
+<div class="authors">
+Jiajun Cheng, Xianwu Zhao, Sainan Liu, Xiaofan Yu, Ravi Prakash, Patrick Codd, Jonathan Katz, Shan Lin
+</div>
 
-    <!-- ======= BUTTONS (replace links) ======= -->
-    <div class="btn-row">
-      <a class="btn" href="YOUR_ARXIV_LINK" target="_blank" rel="noopener">
-        <span class="icon"></span> arXiv
-      </a>
-      <a class="btn" href="YOUR_CODE_LINK" target="_blank" rel="noopener">
-        <span class="icon"></span> Code
-      </a>
-      <!-- Optional extra button -->
-      <a class="btn" href="YOUR_DEMO_LINK" target="_blank" rel="noopener">
-        <span class="icon"></span> Demo
-      </a>
-    </div>
+<div class="affil">
+Your Institution / Research Lab
+</div>
 
-    <!-- ======= DEMO SECTION ======= -->
-    <div class="section-title">Image-to-Text Retrieval Demo: YOURMODEL vs BASELINE</div>
-    <div class="section-sub">Select a query image:</div>
+<div class="btn-row">
+  <a class="btn" href="https://arxiv.org/abs/2505.10764" target="_blank">📄 Paper</a>
+  <a class="btn" href="https://github.com/jiajun344/SurgXBench-Explainable-Vision-Language-Model-Benchmark-for-Surgery" target="_blank">💻 Code</a>
+</div>
 
-    <!-- Thumbnails: put your images in assets/ and update src -->
-    <div class="thumbs" id="thumbs">
-      <div class="thumb" data-src="assets/query1.jpg" title="Query 1">
-        <img src="assets/query1.jpg" alt="Query 1 (placeholder)">
-      </div>
-      <div class="thumb" data-src="assets/query2.jpg" title="Query 2">
-        <img src="assets/query2.jpg" alt="Query 2 (placeholder)">
-      </div>
-      <div class="thumb" data-src="assets/query3.jpg" title="Query 3">
-        <img src="assets/query3.jpg" alt="Query 3 (placeholder)">
-      </div>
-      <div class="thumb" data-src="assets/query4.jpg" title="Query 4">
-        <img src="assets/query4.jpg" alt="Query 4 (placeholder)">
-      </div>
-      <div class="thumb" data-src="assets/query5.jpg" title="Query 5">
-        <img src="assets/query5.jpg" alt="Query 5 (placeholder)">
-      </div>
-      <div class="thumb" data-src="assets/query6.jpg" title="Query 6">
-        <img src="assets/query6.jpg" alt="Query 6 (placeholder)">
-      </div>
-      <div class="thumb" data-src="assets/query7.jpg" title="Query 7">
-        <img src="assets/query7.jpg" alt="Query 7 (placeholder)">
-      </div>
-    </div>
+<!-- Brief Introduction -->
+<div class="section">
+<h2>Overview</h2>
 
-    <!-- Demo panel with a big selected image + side info -->
-    <div class="demo-panel">
-      <div class="demo-top">
-        <strong>Selected query:</strong>
-        <span class="pill" id="selectedLabel">assets/query1.jpg</span>
-      </div>
+<p>
+<strong>SurgXBench</strong> introduces the first explainability-driven benchmark for Vision-Language Models (VLMs) in robotic surgery.
+</p>
 
-      <div class="demo-body">
-        <div class="demo-main">
-          <!-- Main image placeholder -->
-          <img id="mainImage" src="assets/query1.jpg" alt="Selected query (placeholder)"
-               onerror="this.style.display='none'; document.getElementById('mainFallback').style.display='block';" />
-          <div id="mainFallback" class="placeholder" style="display:none;">
-            Put your image at <code>assets/query1.jpg</code>
-          </div>
-        </div>
+<p>
+We evaluate general and surgical VLMs for instrument and action recognition, visualize model reasoning using Grad-CAM and causal graphs, and introduce attention-alignment metrics to assess whether models rely on clinically meaningful visual cues.
+</p>
 
-        <div class="demo-side">
-          <div class="side-card">
-            <h4>Top retrieval (YOURMODEL)</h4>
-            <p>
-              Placeholder result list.<br/>
-              1) “Text result one …”<br/>
-              2) “Text result two …”<br/>
-              3) “Text result three …”
-            </p>
-          </div>
-          <div class="side-card">
-            <h4>Top retrieval (BASELINE)</h4>
-            <p>
-              Placeholder result list.<br/>
-              1) “Text result one …”<br/>
-              2) “Text result two …”<br/>
-              3) “Text result three …”
-            </p>
-          </div>
-          <div class="side-card">
-            <h4>How to hook this up</h4>
-            <p>
-              Replace these placeholders with your real demo output (JS fetch / API / static).
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+<p>
+Our results reveal a gap between classification accuracy and reasoning quality, motivating the need for more grounded supervision in surgical VLMs.
+</p>
+</div>
 
-    <!-- ======= ABSTRACT ======= -->
-    <div class="section-title">Abstract</div>
-    <div class="abstract">
-      <p>
-        Replace this with your abstract. Write 1–3 paragraphs describing the problem, your method,
-        and key results.
-      </p>
-      <p>
-        If you want, add a “Method” and “Results” section under this using the same style.
-      </p>
-    </div>
-
-    <div class="footer">
-      © <span id="year"></span> Your Name / Lab. Built with GitHub Pages.
-    </div>
+<!-- First Image -->
+<div class="section">
+<div class="figure-card">
+  <img src="ins_score.png" alt="Instrument & Action Recognition Results">
+  <div class="figure-caption">
+  Instrument and action recognition performance across evaluated VLMs.
   </div>
+</div>
+</div>
 
-  <script>
-    // Click thumbnails to update the big image
-    const thumbs = document.querySelectorAll(".thumb");
-    const mainImage = document.getElementById("mainImage");
-    const selectedLabel = document.getElementById("selectedLabel");
-    const mainFallback = document.getElementById("mainFallback");
+<!-- Second Image -->
+<div class="section">
+<div class="figure-card">
+  <img src="token_graph.png" alt="Token-level Causal Graph">
+  <div class="figure-caption">
+  Visualization of model reasoning using Grad-CAM and token-level causal graph analysis.
+  </div>
+</div>
+</div>
 
-    thumbs.forEach(t => {
-      t.addEventListener("click", () => {
-        const src = t.getAttribute("data-src");
-        selectedLabel.textContent = src;
+<!-- Abstract -->
+<div class="section">
+<h2>Abstract</h2>
 
-        mainFallback.style.display = "none";
-        mainImage.style.display = "block";
-        mainImage.src = src;
-        mainImage.alt = "Selected query: " + src;
-      });
-    });
+<p>
+Innovations in digital intelligence are transforming robotic surgery with more informed decision-making. Real-time awareness of surgical instrument presence and actions (e.g., cutting tissue) is essential for such systems. Yet, despite decades of research, most machine learning models for this task are trained on small datasets and still struggle to generalize.
+</p>
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<p>
+Recently, Vision-Language Models (VLMs) have brought transformative advances in reasoning across visual and textual modalities. Their unprecedented generalization capabilities suggest great potential for advancing intelligent robotic surgery. However, surgical VLMs remain under-explored, and existing models show limited performance, highlighting the need for benchmark studies to assess their capabilities and limitations and to inform future development.
+</p>
+
+<p>
+To this end, we benchmark the zero-shot performance of several advanced VLMs on two public robotic-assisted laparoscopic datasets for instrument and action classification. Beyond standard evaluation, we integrate explainable AI to visualize VLM attention and uncover causal explanations behind their predictions.
+</p>
+
+<p>
+We also propose several explainability analysis-based metrics to complement standard evaluations. Our analysis reveals that surgical VLMs, despite domain-specific training, often rely on weak contextual cues rather than clinically relevant visual evidence, highlighting the need for stronger visual and reasoning supervision in surgical applications.
+</p>
+</div>
+
+<div class="footer">
+© 2026 SurgXBench | WACV 2026
+</div>
+
+</div>
 </body>
 </html>
